@@ -1,6 +1,9 @@
-import React from 'react'
+import { useContext } from 'react'
+import { Context } from '../context/context'
 
-function Laps ({ lap }) {
+export default function Laps () {
+  const { lap } = useContext(Context)
+
   return (
     <section className='laps'>
       <h3 className='lap-title'>laps</h3>
@@ -29,5 +32,3 @@ function Laps ({ lap }) {
     </section>
   )
 }
-
-export default Laps

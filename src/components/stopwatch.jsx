@@ -1,41 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import useStopWatch from '../hooks/useStopWatch'
 
-function Stopwatch ({ setShowLap, setLap, lap }) {
-  const [time, setTime] = useState(0)
-  const [timerOn, setTimerOn] = useState(false)
-  const [counter, setCounter] = useState(1)
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (timerOn) {
-        setTime(prevTime => prevTime + 10)
-      } else {
-        clearInterval(interval)
-      }
-    }, 10)
-
-    return () => clearInterval(interval)
-  }, [timerOn])
-
-  const handleStart = () => {
-    setTimerOn(true)
-    setLap([])
-  }
-
-  const handleLap = () => {
-    setShowLap(true)
-    setCounter(prev => prev + 1)
-    setLap(prevLap => [...prevLap, { n: counter, lap: time }])
-  }
-
-  const handleReset = () => {
-    setTime(0)
-    setTimerOn(false)
-    setLap([])
-    setShowLap(false)
-    setCounter(1)
-    console.log(lap)
-  }
+export default function Stopwatch ({ setShowLap }) {
+  const { time, timerOn, handleStart, handleLap, handleReset, setTimerOn } =
+    useStopWatch()
 
   return (
     <section className='watch'>
@@ -83,5 +50,3 @@ function Stopwatch ({ setShowLap, setLap, lap }) {
     </section>
   )
 }
-
-export default Stopwatch
